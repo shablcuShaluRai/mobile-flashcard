@@ -18,7 +18,7 @@ export default class DeckListItem extends Component {
 
 const styles = StyleSheet.create({
   listItem: {
-    padding: 40,
+    padding: 20,
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: '#d6d7da'
