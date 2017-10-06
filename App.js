@@ -1,22 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React, {Component} from 'react'
+import { View } from 'react-native'
 import DeckList from './components/DeckList'
+import DeckView from './components/DeckView'
+import { StackNavigator } from 'react-navigation'
 
-export default class App extends React.Component {
+const Stack = StackNavigator({
+  DeckList: {
+    screen: DeckList
+  },
+  DeckView: {
+    screen: DeckView
+  }
+})
+
+export default class App extends Component {
   render() {
-  return(
-    <View>
-   <DeckList />
-    </View>
-  )
+    return (
+      <Stack />
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

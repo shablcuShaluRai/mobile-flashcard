@@ -1,12 +1,12 @@
 import React, {Component} from 'React'
 import {View, Text, FlatList} from 'react-native'
-import DecklistItem from './DeckListItem'
+import DeckListItem from './DeckListItem'
 import { getDecks }  from '../utils/helpers'
 
 export default class DeckList extends Component{
 
   renderItem = ({ item }) =>{
-return <DecklistItem  {...item }/>
+return <DeckListItem  {...item } navigation={this.props.navigation}/>
   }
 
   render(){

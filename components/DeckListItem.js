@@ -2,22 +2,25 @@ import React, { Component } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 
 
-export default function DecklistItem({title, questions}){
-  return(
-    <View style = {styles.listItem}>
-
-    <TouchableOpacity onPress={() => alert('hey you touch me')}>
-    <Text>{ title }</Text>
-    <Text> {`${questions.length} questions`} </Text>
-    </TouchableOpacity>
-
-    </View>
-  )
+export default class DeckListItem extends Component {
+  render() {
+    const { title, questions, navigation } = this.props
+    return (
+      <View style={styles.listItem}>
+        <TouchableOpacity onPress={() => navigation.navigate('DeckView', { title, questions })} >
+          <Text>{ title }</Text>
+          <Text>{ `${questions.length} cards` }</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  listItem:{
-    padding: 10,
-
+  listItem: {
+    padding: 40,
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da'
   }
 })
