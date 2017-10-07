@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import { View } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native'
 import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import NewDeck from './components/NewDeck'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import { Entypo, Ionicons } from '@expo/vector-icons'
-import {black,white} from './utils/colors'
+import {purple,white} from './utils/colors'
 import {Constants} from 'expo'
 
 const Stack = StackNavigator({
@@ -34,18 +34,41 @@ const Tabs = TabNavigator({
   }
 },
 {
-  tabBarOptions: {
-    activeTintColor: black
-  }
+ navigationOptions: {
+   header: null
+ },
+ tabBarOptions: {
+   activeTintColor: Platform.OS === 'ios' ? purple : white,
+   style: {
+   height: 56,
+     backgroundColor: Platform.OS === 'ios' ? white : purple,
+     shadowColor: 'rgba(0, 0, 0, 0.24)',
+   shadowOffset: {
+       width: 0,
+     height: 3
+     },
+     shadowRadius: 6,
+     shadowOpacity: 1
+   }
+ }
+})
+
+function FlashcardStatusBar({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
 }
 
-)
 
 export default class App extends Component {
   render() {
     return (
+      <View style={{flex:1}}>
+      <FlashcardStatusBar backgroundColor={purple} barStyle="light-content" />
        <Tabs/>
-
+    </View>
     );
   }
 }
