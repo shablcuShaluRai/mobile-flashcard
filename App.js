@@ -66,7 +66,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={{flex:1}}>
-      <FlashcardStatusBar backgroundColor={purple} barStyle="light-content" />
+      <View style={{height:20}}/>
+       <FlashcardStatusBar backgroundColor={purple} barStyle="light-content" />
        <Tabs/>
     </View>
     );

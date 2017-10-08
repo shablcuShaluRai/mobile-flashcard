@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
-import {View, Text, TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native'
+import { saveDeckTitle } from '../utils/decks'
 
 export default class NewDeck extends Component{
+
+state= {
+  title : ''
+}
+
+submit = () =>{
+  saveDeckTitle(this.state.title)
+  this.props.navigation.navigate('Decks');
+}
+
   render(){
     return(
-      <View>
-        <Text>Create new Deck </Text>
-       <TouchableOpacity>
+      <KeyboardAvoidingView behavior='padding'>
+
+      <TextInput
+        placeholder = "create new Decks"
+        onChangeText={(title) => this.setState({title})}
+        value = {this.state.title}
+      />
+
+      <TouchableOpacity
+        onPress = {this.submit}>
        <Text>Submit</Text>
-       </TouchableOpacity> 
-      </View>
+      </TouchableOpacity>
+
+      </KeyboardAvoidingView>
+
     )
   }
 }
