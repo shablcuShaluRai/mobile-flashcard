@@ -5,8 +5,11 @@ import { connect } from 'react-redux'
  class DeckView extends Component {
   render() {
     const navigation = this.props.navigation
+    console.log("navigation deckview", navigation);
     const title = navigation.state.params.title
-      const questions = this.props.decks[title]['questions']
+      const decks = this.props.decks[title]
+      console.log("deckview decktitile",decks);
+      const questions = decks['questions']
       console.log("deckview", questions);
 
         return (
@@ -15,6 +18,9 @@ import { connect } from 'react-redux'
         <Text>{ `${questions.length} cards` }</Text>
         <TouchableOpacity onPress={() => navigation.navigate('NewQuizzCard', { title })} >
           <Text>Add Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate('Quiz', {decks})}>
+        <Text> Start Quiz </Text>
         </TouchableOpacity>
       </View>
     )

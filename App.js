@@ -4,6 +4,7 @@ import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import NewDeck from './components/NewDeck'
 import NewQuizzCard from './components/NewQuizzCard'
+import Quiz from './components/Quiz'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import { Entypo, Ionicons } from '@expo/vector-icons'
 import {purple,white} from './utils/colors'
@@ -45,6 +46,9 @@ const Stack = StackNavigator({
   },
   NewQuizzCard:{
     screen:NewQuizzCard
+  },
+  Quiz:{
+    screen:Quiz
   }
 })
 
@@ -85,6 +89,7 @@ const Tabs = TabNavigator({
  }
 })
 
+// status bar
 function FlashcardStatusBar({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
