@@ -3,6 +3,7 @@ import { View, Platform, StatusBar } from 'react-native'
 import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import NewDeck from './components/NewDeck'
+import NewQuizzCard from './components/NewQuizzCard'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import { Entypo, Ionicons } from '@expo/vector-icons'
 import {purple,white} from './utils/colors'
@@ -41,10 +42,13 @@ const Stack = StackNavigator({
   },
   DeckView: {
     screen: DeckView
+  },
+  NewQuizzCard:{
+    screen:NewQuizzCard
   }
 })
 
-// use fro switch between tabs.
+// use for switch between tabs.
 const Tabs = TabNavigator({
   Decks:{
     screen:Stack,
