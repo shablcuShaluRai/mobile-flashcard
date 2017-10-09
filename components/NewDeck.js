@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import {View, Text, TouchableOpacity, KeyboardAvoidingView, TextInput} from 'react-native'
-import { saveDeckTitle } from '../utils/decks'
+import { saveDeckTitle } from '../actions'
+import { connect } from 'react-redux'
 
-export default class NewDeck extends Component{
+ class NewDeck extends Component{
 
 state= {
   title : ''
 }
 
+// when submit the decksname , call submit method
 submit = () =>{
-  saveDeckTitle(this.state.title)
-  this.props.navigation.navigate('Decks');
+  title = this.state.title;
+  if(title !== ''){
+    this.props.saveDeckTitle(title)
+      this.props.navigation.navigate('Decks');
+      this.setState({title: ''})
+  }
+
 }
 
   render(){
@@ -33,3 +40,15 @@ submit = () =>{
     )
   }
 }
+
+
+function mapDispatchToProps(dispatch){
+  return {
+    saveDeckTitle:(title)=> dispatch(saveDeckTitle(title))
+  }
+}
+
+//We can either retrieve data by obtaining its current state,
+// or change its state by dispatching an action
+
+export default connect(null, mapDispatchToProps)(NewDeck)

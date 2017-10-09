@@ -2,23 +2,16 @@ import React, {Component} from 'React'
 import {View, Text, FlatList} from 'react-native'
 import DeckListItem from './DeckListItem'
 import { getDecksData }  from '../utils/decks'
+import {connect} from 'react-redux'
+import { getDecks } from '../actions'
 
-export default class DeckList extends Component{
+ class DeckList extends Component{
 
-  state = {
-    decks: []
-  }
+
 
   componentDidMount = () => {
-    this.loadDecks();
-    console.log(this.loadDecks());
-  }
-
-  loadDecks = async () => {
-    const decks = await getDecksData()
-    this.setState({ decks })
-    console.log(this.state.decks);
-
+    this.props.getDecks();
+    console.log(this.props.getDecks());
   }
 
 
@@ -27,11 +20,12 @@ return <DeckListItem  {...item } navigation={this.props.navigation}/>
   }
 
   render(){
-
+    const decks = this.props.decks
+    const decksData = Object.keys(decks).map(key => decks[key])
     return (
       <View>
       <FlatList
-      data ={this.state.decks}
+      data ={decksData}
       renderItem = {this.renderItem}
       keyExtractor  ={(item , index ) => index}
       />
@@ -39,3 +33,16 @@ return <DeckListItem  {...item } navigation={this.props.navigation}/>
     )
   }
 }
+
+function mapStateToProps({ decks})
+{
+  return { decks }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    getDecks: () => dispatch(getDecks())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DeckList)
