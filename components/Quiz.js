@@ -8,7 +8,7 @@ export default class Quiz extends Component{
  state = {
    currentQuestion:1,
    showQuestion:true,
-   numberCorrect:0,
+   correctQuizNumber:0,
    quizOver: false
  }
 
@@ -22,17 +22,26 @@ export default class Quiz extends Component{
     const deck = this.props.navigation.state.params.decks;
     const questions = deck.questions
     // number of correct quiz
-    const numberCorrect = (
+    const correctQuizNumber = (
       quizzes
-      ? this.state.numberCorrect + 1
-      : this.state.numberCorrect
+      ? this.state.correctQuizNumber + 1
+      : this.state.correctQuizNumber
     )
     const currentQuestion = this.state.currentQuestion + 1
     const showQuestion = true;
-      this.setState({ currentQuestion, showQuestion, numberCorrect})
+      this.setState({ currentQuestion, showQuestion, correctQuizNumber})
       if(currentQuestion > questions.length){
         this.setState({ quizOver: true})
       }
+  }
+
+  restartQuiz = () => {
+    this.setState({
+      currentQuestion:1,
+      showQuestion:true,
+      correctQuizNumber:0,
+      quizOver: false
+    })
   }
 
 render(){
@@ -41,16 +50,26 @@ render(){
   console.log("quiz deck", deck.title);
   const title = deck.title
   const questions = deck.questions
-  const { currentQuestion, showQuestion, numberCorrect, quizOver} = this.state
-  console.log("quiz number correct ", numberCorrect);
+  const { currentQuestion, showQuestion, correctQuizNumber, quizOver} = this.state
+  console.log("quiz number correct ", correctQuizNumber);
   console.log("quizz show questions", showQuestion);
   console.log("quizz currentQuestion", currentQuestion);
   const quiz =  questions[ currentQuestion - 1]?questions[ currentQuestion - 1].question:1
   console.log("quizz", quiz);
 
   if(quizOver){
+    const correctQuizPercentage = Math.round((correctQuizNumber/questions.length)*100)
+    console.log("quiz percenatge", correctQuizPercentage);
     return(
-         <Text> quiz over </Text>
+      <View>
+         <Text>{ correctQuizPercentage} % Correct Quiz </Text>
+         <TouchableOpacity onPress = { () => this.restartQuiz()}>
+         <Text> Restart Quiz </Text>
+         </TouchableOpacity>
+         <TouchableOpacity onPress = { () => this.props.navigation.goBack()}>
+         <Text>Back</Text>
+         </TouchableOpacity>
+      </View>
          )
   }
 
