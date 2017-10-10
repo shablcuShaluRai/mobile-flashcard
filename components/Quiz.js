@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { setLocalNotification, clearLocalNotification } from '../utils/notifications'
 
 
 export default class Quiz extends Component{
@@ -58,6 +59,8 @@ render(){
   console.log("quizz", quiz);
 
   if(quizOver){
+    clearLocalNotification()
+    .then(setLocalNotification)
     const correctQuizPercentage = Math.round((correctQuizNumber/questions.length)*100)
     console.log("quiz percenatge", correctQuizPercentage);
     return(

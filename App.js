@@ -5,6 +5,7 @@ import DeckView from './components/DeckView'
 import NewDeck from './components/NewDeck'
 import NewQuizzCard from './components/NewQuizzCard'
 import Quiz from './components/Quiz'
+import { setLocalNotification } from './utils/notifications'
 import { StackNavigator, TabNavigator } from 'react-navigation'
 import { Entypo, Ionicons } from '@expo/vector-icons'
 import {purple,white} from './utils/colors'
@@ -100,6 +101,10 @@ function FlashcardStatusBar({backgroundColor, ...props}) {
 
 
 export default class App extends Component {
+
+  componentDidMount(){
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>
