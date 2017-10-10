@@ -99,12 +99,11 @@ function FlashcardStatusBar({backgroundColor, ...props}) {
   )
 }
 
-
 export default class App extends Component {
-
   componentDidMount(){
     setLocalNotification()
   }
+
   render() {
     return (
       <Provider store={store}>
@@ -112,8 +111,8 @@ export default class App extends Component {
       <View style={{height:20}}/>
        <FlashcardStatusBar backgroundColor={purple} barStyle="light-content" />
        <Tabs/>
-    </View>
-    </Provider>
+      </View>
+     </Provider>
     );
   }
 }

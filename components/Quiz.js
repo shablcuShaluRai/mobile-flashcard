@@ -13,7 +13,7 @@ export default class Quiz extends Component{
    quizOver: false
  }
 
- flipCard = () => {
+  flipCard = () => {
      const showQuestion = !this.state.showQuestion
      this.setState({ showQuestion })
   }
@@ -46,25 +46,17 @@ export default class Quiz extends Component{
   }
 
 render(){
-  console.log("quiz deck list ", this.props);
-  const deck = this.props.navigation.state.params.decks
-  console.log("quiz deck", deck.title);
-  const title = deck.title
-  const questions = deck.questions
-  const { currentQuestion, showQuestion, correctQuizNumber, quizOver} = this.state
-  console.log("quiz number correct ", correctQuizNumber);
-  console.log("quizz show questions", showQuestion);
-  console.log("quizz currentQuestion", currentQuestion);
-  const quiz =  questions[ currentQuestion - 1]?questions[ currentQuestion - 1].question:1
-  console.log("quizz", quiz);
+    const deck = this.props.navigation.state.params.decks
+    const title = deck.title
+    const questions = deck.questions
+    const { currentQuestion, showQuestion, correctQuizNumber, quizOver} = this.state
 
-  if(quizOver){
-    clearLocalNotification()
-    .then(setLocalNotification)
-    const correctQuizPercentage = Math.round((correctQuizNumber/questions.length)*100)
-    console.log("quiz percenatge", correctQuizPercentage);
-    return(
-      <View>
+    if(quizOver){
+       clearLocalNotification()
+         .then(setLocalNotification)
+       const correctQuizPercentage = Math.round((correctQuizNumber/questions.length)*100)
+       return(
+         <View>
          <Text>{ correctQuizPercentage} % Correct Quiz </Text>
          <TouchableOpacity onPress = { () => this.restartQuiz()}>
          <Text> Restart Quiz </Text>
@@ -72,35 +64,30 @@ render(){
          <TouchableOpacity onPress = { () => this.props.navigation.goBack()}>
          <Text>Back</Text>
          </TouchableOpacity>
-      </View>
+         </View>
          )
-  }
-
-  else {
-  return (
-    <View>
-    <Text>Deck: { title } </Text>
-    <Text> { currentQuestion }/ { questions.length } </Text>
-    {
-      showQuestion
-      ?<Text>{ questions[ currentQuestion - 1].question} </Text>
-      :<Text>{ questions[ currentQuestion - 1].answer} </Text>
-    }
-
-    <TouchableOpacity onPress={this.flipCard}>
+   }
+   else {
+     return (
+       <View>
+       <Text>Deck: { title } </Text>
+       <Text> { currentQuestion }/ { questions.length } </Text>
+         {
+          showQuestion
+          ?<Text>{ questions[ currentQuestion - 1].question} </Text>
+          :<Text>{ questions[ currentQuestion - 1].answer} </Text>
+         }
+       <TouchableOpacity onPress={this.flipCard}>
        <Text>{ showQuestion ? 'answer' : 'question' }</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity onPress={this.nextQuiz.bind(null, true)}>
-      <Text>Correct</Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={this.nextQuiz.bind(null, false)}>
-      <Text>Incorrect</Text>
-    </TouchableOpacity>
-    </View>
-
-  )
-
+       </TouchableOpacity>
+       <TouchableOpacity onPress={this.nextQuiz.bind(null, true)}>
+       <Text>Correct</Text>
+       </TouchableOpacity>
+       <TouchableOpacity onPress={this.nextQuiz.bind(null, false)}>
+       <Text>Incorrect</Text>
+       </TouchableOpacity>
+      </View>
+     )
 }
 }
 }

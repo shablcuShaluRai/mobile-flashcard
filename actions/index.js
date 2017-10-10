@@ -26,12 +26,6 @@ export const saveDeckTitle = (title) => dispatch => (
   .then(newDecks => dispatch(receiveDecks(newDecks)))
 )
 
-// export const addCardToDeck = ( title, question) => dispatch => (
-//   DecksDatabase
-//   .addCardToDeck(title, question)
-//   .then(newDecks => dispatch(receiveDecks(newDecks)))
-// )
-
 
 export const addCardToDeck = (title, question) => dispatch => (
   DecksDatabase

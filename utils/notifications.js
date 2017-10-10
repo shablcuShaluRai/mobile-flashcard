@@ -39,6 +39,7 @@ export function setLocalNotification(){
           tommorrow.setHours(20)
           tommorrow.setMinutes(0)
 
+
           Notifications.scheduleLocalNotificationAsync(
             createNotification(),
             {
@@ -47,7 +48,7 @@ export function setLocalNotification(){
             }
           )
           AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
-          console.log("Notifications",x);
+
         }
       })
     }

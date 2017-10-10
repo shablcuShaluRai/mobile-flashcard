@@ -14,10 +14,7 @@ class NewQuizzCard extends Component{
 submit = () => {
     const { question, answer } = this.state
     const title = this.props.navigation.state.params.title
-    console.log("newquizz", title);
     const quizzCard = { question, answer }
-    console.log("new quizz crad", card);
-    console.log("addCardToDeck", this.props.addCardToDeck(title,card));
     if (question !== '' && answer !== '') {
       this.props.addCardToDeck(title,quizzCard)
       this.props.navigation.goBack()

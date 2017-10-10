@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { gray, white, black, purple } from '../utils/colors'
 
  class DeckView extends Component {
-  render() {
-    const navigation = this.props.navigation
-    console.log("navigation deckview", navigation);
-    const title = navigation.state.params.title
-      const decks = this.props.decks[title]
-      console.log("deckview decktitile",decks);
-      const questions = decks['questions']
-      console.log("deckview", questions);
-
-        return (
-      <View style={styles.container}>
-        <Text style={{fontSize: 64}}>{ title }</Text>
-        <Text>{ `${questions.length} cards` }</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('NewQuizzCard', { title })} >
-          <Text>Add Card</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress = {() => navigation.navigate('Quiz', {decks})}>
-        <Text> Start Quiz </Text>
-        </TouchableOpacity>
-      </View>
+   render() {
+     const navigation = this.props.navigation
+     const title = navigation.state.params.title
+     const decks = this.props.decks[title]
+     const questions = decks['questions']
+       return (
+         <View style={styles.container}>
+         <Text style={styles.title}>{ title }</Text>
+         <Text style = { styles.cardsNum}>{ `${questions.length} cards` }</Text>
+         <TouchableOpacity
+           style={styles.addCardButton}
+           onPress={() => navigation.navigate('NewQuizzCard', { title })} >
+           <Text style ={ styles.addBtnText}>Add Card</Text>
+         </TouchableOpacity>
+         <TouchableOpacity
+         style={styles.startQuizButton}
+         onPress = {() => navigation.navigate('Quiz', {decks})}>
+           <Text style ={styles.quizBtnText}> Start Quiz </Text>
+         </TouchableOpacity>
+         </View>
     )
   }
 }
@@ -30,10 +31,55 @@ import { connect } from 'react-redux'
 const styles = StyleSheet.create({
   container: {
   flex: 1,
+  padding:10,
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  backgroundColor: 'white'
 },
+title:{
+  fontSize:45,
+  fontWeight:'bold'
+},
+cardsNum: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: gray
+  },
+  addCardButton: {
+     marginTop: 60,
+     marginBottom: 20,
+     paddingVertical: 20,
+     paddingHorizontal: 60,
+     borderRadius: 2,
+     borderWidth: 1,
+     backgroundColor: purple,
+     height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  startQuizButton: {
+    paddingVertical: 20,
+    paddingHorizontal: 53,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: purple,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+  },
+  quizBtnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: 'center',
+  },
 })
+
+
 
 function mapStateToProps({ decks }){
   return { decks }
