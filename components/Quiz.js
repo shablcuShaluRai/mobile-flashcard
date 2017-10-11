@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { setLocalNotification, clearLocalNotification } from '../utils/notifications'
+import { white, gray, green, red, purple } from '../utils/colors'
+
 
 
 export default class Quiz extends Component{
@@ -56,38 +58,134 @@ render(){
          .then(setLocalNotification)
        const correctQuizPercentage = Math.round((correctQuizNumber/questions.length)*100)
        return(
-         <View>
-         <Text>{ correctQuizPercentage} % Correct Quiz </Text>
-         <TouchableOpacity onPress = { () => this.restartQuiz()}>
-         <Text> Restart Quiz </Text>
+         <View style={styles.container}>
+         <Text style={styles.quizPercentageResults}>{ correctQuizPercentage} % Correct Quiz </Text>
+         <TouchableOpacity
+          style={styles.restartQuizButton}
+          onPress = { () => this.restartQuiz()}>
+         <Text style = { styles.btnText}> Restart Quiz </Text>
          </TouchableOpacity>
-         <TouchableOpacity onPress = { () => this.props.navigation.goBack()}>
-         <Text>Back</Text>
+         <TouchableOpacity
+           style={styles.backToDeckButton}
+           onPress = { () => this.props.navigation.goBack()}>
+         <Text style = { styles.btnText}>Back</Text>
          </TouchableOpacity>
          </View>
          )
    }
    else {
      return (
-       <View>
-       <Text>Deck: { title } </Text>
-       <Text> { currentQuestion }/ { questions.length } </Text>
+        <View style={styles.container}>
+        <Text style={styles.numCards}> { currentQuestion }/ { questions.length } </Text>
          {
           showQuestion
-          ?<Text>{ questions[ currentQuestion - 1].question} </Text>
-          :<Text>{ questions[ currentQuestion - 1].answer} </Text>
+          ?<Text  style={styles.showQuestionCardText}>{ questions[ currentQuestion - 1].question} </Text>
+          :<Text  style={styles.showQuestionCardText}>{ questions[ currentQuestion - 1].answer} </Text>
          }
-       <TouchableOpacity onPress={this.flipCard}>
-       <Text>{ showQuestion ? 'answer' : 'question' }</Text>
+       <TouchableOpacity
+       style={styles.flipCard}
+       onPress={this.flipCard} >
+       <Text style = {styles.btnText}>{ showQuestion ? 'answer' : 'question' }</Text>
        </TouchableOpacity>
-       <TouchableOpacity onPress={this.nextQuiz.bind(null, true)}>
-       <Text>Correct</Text>
+       <TouchableOpacity
+       style={styles.correctButton}
+       onPress={this.nextQuiz.bind(null, true)}>
+       <Text style = {styles.btnText}>Correct</Text>
        </TouchableOpacity>
-       <TouchableOpacity onPress={this.nextQuiz.bind(null, false)}>
-       <Text>Incorrect</Text>
+       <TouchableOpacity
+       style={styles.incorrectButton}
+       onPress={this.nextQuiz.bind(null, false)}>
+       <Text style = {styles.btnText}>Incorrect</Text>
        </TouchableOpacity>
       </View>
      )
 }
 }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: white
+  },
+  showQuestionCardText: {
+    fontSize: 42,
+    fontWeight: 'bold'
+  },
+  numCards: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: gray
+  },
+  flipCard: {
+    marginTop: 20,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 60,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: purple,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+  },
+  correctButton: {
+    marginTop: 20,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 60,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: green,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+  },
+  btnText: {
+    color: white,
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  incorrectButton: {
+    marginTop: 20,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 55,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: red,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+ },
+  quizPercentageResults: {
+    fontSize: 42,
+    fontWeight: '500'
+  },
+  restartQuizButton: {
+    marginTop: 20,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 50,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: purple,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+  },
+  backToDeckButton: {
+    marginTop: 20,
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 90,
+    borderRadius: 2,
+    borderWidth: 1,
+    backgroundColor: purple,
+    height: 45,
+   justifyContent: 'center',
+   alignItems: 'center',
+  }
+})

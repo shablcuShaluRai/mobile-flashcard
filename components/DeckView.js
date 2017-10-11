@@ -16,12 +16,12 @@ import { gray, white, black, purple } from '../utils/colors'
          <TouchableOpacity
            style={styles.addCardButton}
            onPress={() => navigation.navigate('NewQuizzCard', { title })} >
-           <Text style ={ styles.addBtnText}>Add Card</Text>
+           <Text style ={ styles.btnText}>Add Card</Text>
          </TouchableOpacity>
          <TouchableOpacity
          style={styles.startQuizButton}
          onPress = {() => navigation.navigate('Quiz', {decks})}>
-           <Text style ={styles.quizBtnText}> Start Quiz </Text>
+           <Text style ={styles.btnText}> Start Quiz </Text>
          </TouchableOpacity>
          </View>
     )
@@ -57,11 +57,6 @@ cardsNum: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  addBtnText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center',
-  },
   startQuizButton: {
     paddingVertical: 20,
     paddingHorizontal: 53,
@@ -72,11 +67,12 @@ cardsNum: {
    justifyContent: 'center',
    alignItems: 'center',
   },
-  quizBtnText: {
+  btnText: {
     color: white,
     fontSize: 22,
     textAlign: 'center',
   },
+
 })
 
 
