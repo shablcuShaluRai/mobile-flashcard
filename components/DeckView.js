@@ -18,11 +18,14 @@ import { gray, white, black, purple } from '../utils/colors'
            onPress={() => navigation.navigate('NewQuizzCard', { title })} >
            <Text style ={ styles.btnText}>Add Card</Text>
          </TouchableOpacity>
+         {
+            questions.length > 0 &&
          <TouchableOpacity
          style={styles.startQuizButton}
          onPress = {() => navigation.navigate('Quiz', {decks})}>
            <Text style ={styles.btnText}> Start Quiz </Text>
          </TouchableOpacity>
+       }
          </View>
     )
   }
