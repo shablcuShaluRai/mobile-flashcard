@@ -89,4 +89,5 @@
 + npm [here](https://docs.npmjs.com/)
 
 + css tricks [flexbox style](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
- 
+
++ generate apk file [apk generate](https://gist.github.com/shalurai/24ba7ed66a10ad53811718c562c89425)
